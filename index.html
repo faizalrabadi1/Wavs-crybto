@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>منصة WaveSight</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'gray-900': '#0d1117',
+            'gray-800': '#161b22',
+            'gray-700': '#21262d',
+            'gray-600': '#30363d',
+            'cyan-glow': '#00a9ff',
+            'yellow-glow': '#ffc800',
+          },
+          fontFamily: {
+            sans: ['"Inter"', 'system-ui', 'sans-serif'],
+            mono: ['"Fira Code"', 'monospace']
+          },
+        }
+      }
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/recharts/umd/Recharts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/docx/build/index.js"></script>
+    <style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0d1117;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #30363d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4a5568;
+        }
+        @keyframes draw-wave {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        .animate-wave-draw {
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            animation: draw-wave 1.5s ease-out forwards;
+        }
+        @keyframes pulse-border {
+            0%, 100% { stroke-opacity: 1; stroke-width: 1; }
+            50% { stroke-opacity: 0.4; stroke-width: 1.5; }
+        }
+        .animate-pulse-border {
+            animation: pulse-border 2.5s ease-in-out infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.7; }
+        }
+        .animate-pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+            transform-origin: center;
+        }
+        @keyframes pulse-signal-box {
+            0%, 100% {
+                box-shadow: 0 0 8px 0px var(--glow-color, rgba(0, 169, 255, 0.5));
+            }
+            50% {
+                box-shadow: 0 0 20px 4px var(--glow-color, rgba(0, 169, 255, 0.7));
+            }
+        }
+        .animate-pulse-signal-box {
+            animation: pulse-signal-box 2.5s ease-in-out infinite;
+        }
+        @keyframes pulse-live {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.7;
+            }
+        }
+        .animate-pulse-live {
+            animation: pulse-live 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .text-glow-cyan {
+            text-shadow: 0 0 8px rgba(0, 169, 255, 0.8), 0 0 2px rgba(255, 255, 255, 0.5);
+        }
+        @keyframes pulse-dot {
+            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+            70% { transform: scale(1.2); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+            100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+        .animate-pulse-dot {
+            animation: pulse-dot 1.5s infinite;
+        }
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fade-in 0.5s ease-out forwards;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.28.0",
+    "astronomy-engine": "https://esm.sh/astronomy-engine@2.1.19"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-gray-900 text-gray-300 font-sans">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
